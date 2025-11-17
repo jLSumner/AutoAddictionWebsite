@@ -1,0 +1,203 @@
+/* Import Montserrat from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+
+body, html {
+	background: black;
+	color: white;
+	font-family: 'Montserrat', san-serif;
+	
+	/* height: 150vh; */
+}
+
+h1 {
+	margin-left: 30px;
+}
+
+#logo {
+	margin: 15px;
+}
+
+form.logout {
+	position: fixed;
+	right: 10px;
+	top: 10px;
+}
+
+#logOut {
+	background-color: transparent;
+	border: 2px #2e96db solid;
+	color: #2e96db;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	
+}
+
+#logOut:hover {
+	background-color: #2e96db; 
+	color: white;
+}
+
+.mainSection {
+	width: 99vw;
+	min-height: 75vh;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	
+	background: #121212;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 55px;
+	border-bottom-right-radius: 15px;
+	
+	/* border: 2px red solid; */
+}
+
+.sideNav {
+	width: 15vw;
+	min-height: 75vh;
+	
+	position: absolute;
+	left: 0;
+	
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 55px;
+	border-bottom-left-radius: 55px;
+	border-bottom-right-radius: 0px;
+	
+	/* border: 2px green solid; */
+}
+
+.sideNavTop {
+	width: 15vw;
+	min-height: 5vh;
+	
+	position: absolute;
+	top: 0;
+	
+	background: white;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 55px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	box-shadow: -1px 10px 12px -5px rgba(0, 0, 0, 0.3);
+}
+
+.sideNavTop h2 {
+	color: black;
+	font-weight: bold;
+	
+	margin-left: 25px;
+}
+
+.sideNavToggles {
+	width: 15vw;
+	min-height: 67.75vh;
+	
+	margin-top: 7.5vh;
+	
+	background: #ededed;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 55px;
+	border-bottom-right-radius: 0px;
+	
+	display: block;
+	justify-content: center;
+	
+	/* border: 2px red solid; */
+}
+
+.sideNavToggles ul {
+	padding-top: 5px;
+	
+}
+
+.sideNavToggles button {
+  background: none;
+  border: none;
+  color: black;
+  font: inherit;
+  cursor: pointer;
+  padding: 0.2em;
+  padding-top: 8px;
+  text-align: left;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.sideNavToggles button:hover {
+  color: #2e96db;
+}
+
+.sectionBody {
+	width: 81.75vw;
+	min-height: 70vh;
+	max-height: 70vh;
+	
+	position: absolute;
+	right: 0;
+	margin-right: 35px;
+	overflow-y: scroll;
+	
+	background: #c2c2c2;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 15px;
+	
+	/* border: 2px red solid; */
+	/* z-index: 2; */
+}
+
+
+form.add-product-form {
+	position: absolute;
+	left: 0;
+	margin-left: 25px;
+	
+	/* width: 40vw; */
+	/* height: 50vh; */
+	
+	/* border: 2px red solid; */
+}
+
+.formRow {
+	color: black;
+	
+	margin-top: 15px;
+}
+
+.formRow label, input, textarea {
+  display: block;
+  width: 15vw;
+}
+
+#Specs, #Description {
+	height: 7vh;
+}
+
+
+.supportSection h1, h2, p {
+	color: black;
+	text-align: left;
+	margin-left: 50px;
+}
+
+.supportSection p {
+	color: black;
+	text-align: left;
+	margin-left: 50px;
+	max-width: 30vw;
+}
+
+
+
+

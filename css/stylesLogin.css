@@ -1,0 +1,77 @@
+/* Import Montserrat from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+
+body, html {
+	background: black;
+	display: flex;
+	justify-content: center;     
+	align-items: center;        
+	height: 100vh;
+	margin: 0;        
+
+	font-family: 'Montserrat', sans-serif;	
+}
+
+.loginSection {
+	min-width: 30vw;
+	min-height: 20vh;
+
+	/* border: 2px red solid; */
+
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+
+	color: white;
+	line-height: 1.6;
+}
+.loginSection img {
+	margin-right: 100px;
+}
+
+.formGroup {
+	margin-top: 20px;
+}
+
+/* form { */
+	/* background: #121212; */
+	/* border-radius: 4px; */
+	/* padding: 20px; */
+/* } */
+
+form label {
+	font-weight: bold;
+}
+
+form input {
+	border: 2px #2e96db solid;
+	background: transparent;
+	border-radius: 4px;
+	margin-left: 20px;
+	min-width: 15vw;
+	height: 30px;
+	color: white; 
+	font-family: 'Montserrat', sans-serif;	
+}
+
+#loginButton {
+	background-color: transparent; 
+	border: 2px #2e96db solid;
+	color: #2e96db;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+	text-transform: uppercase;
+	margin-top: 40px;
+}
+
+#loginButton:hover {
+	background-color: #2e96db; 
+	color: white;
+}
