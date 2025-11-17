@@ -1,0 +1,109 @@
+<!-- Sidebar -->
+<div id="sidebar">
+  <button onclick="loadArticle(1)">Article 1</button>
+  <button onclick="loadArticle(2)">Article 2</button>
+</div>
+
+<!-- Modular Section -->
+<div id="content"></div>
+
+<script>
+  function loadArticle(id) {
+    fetch(`http://localhost:3000/api/article/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('content').innerHTML = `
+          <h2>${data.title}</h2>
+          <p>${data.content}</p>
+        `;
+      })
+      .catch(err => console.error('Error:', err));
+  }
+</script>
+
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <button onclick="loadProduct(1)">Product 1</button>
+  <button onclick="loadProduct(2)">Product 2</button>
+</div>
+
+<!-- Modular Section -->
+<div id="product-display" style="border: 1px solid #ccc; padding: 20px; margin-top: 20px;"></div>
+
+<script>
+  function loadProduct(id) {
+    fetch(`http://localhost:3000/api/products/${id}`)
+      .then(response => response.json())
+      .then(product => {
+        document.getElementById('product-display').innerHTML = `
+          <h2>${product.name}</h2>
+          <p>${product.description}</p>
+          <p><strong>Price:</strong> $${product.price}</p>
+          <img src="${product.image}" alt="${product.name}" style="max-width: 200px;">
+        `;
+      })
+      .catch(error => {
+        console.error('Error fetching product:', error);
+        document.getElementById('product-display').innerHTML = `<p>Failed to load product.</p>`;
+      });
+  }
+</script>
+
+
+
+
+<a href="#" data-category="speakers" onclick="loadProducts(this)">SPEAKERS</a>
+<a href="#" data-category="subwoofers" onclick="loadProducts(this)">SUBWOOFERS</a>
+
+app.get('/api/products/category/:name', (req, res) => {
+  const category = req.params.name;
+  db.query(
+    'SELECT * FROM products WHERE category_id = (SELECT id FROM categories WHERE name = ?)',
+    [category],
+    (err, results) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json(results);
+    }
+  );
+});
+
+////////////////////
+function loadProducts(element) {
+  const category = element.getAttribute('data-category');
+
+  fetch(`http://localhost:3000/api/products/category/${category}`)
+    .then(res => res.json())
+    .then(products => {
+      const container = document.querySelector('.productMain');
+      container.innerHTML = ''; // Clear previous content
+
+      products.forEach(product => {
+        const productHTML = `
+          <div style="border: 1px solid #ccc; margin-bottom: 20px; padding: 10px;">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p><strong>Price:</strong> $${product.price}</p>
+            <img src="${product.image}" alt="${product.name}" style="max-width: 200px;">
+          </div>
+        `;
+        container.innerHTML += productHTML;
+      });
+    })
+    .catch(err => {
+      console.error('Error loading products:', err);
+      document.querySelector('.productMain').innerHTML = '<p>Failed to load products.</p>';
+    });
+}
+
+.productMain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+.productMain div {
+  flex: 1 1 300px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}

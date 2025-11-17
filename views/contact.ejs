@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact | Auto Addiction Bendigo</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="services">
+  <!-- Dynamic header -->
+  <div id="header"></div>
+  
+  <div id="sticky-button">
+			<a href="gallery">
+				<span class="vertical-text">G</span>
+				<span class="vertical-text">A</span>
+				<span class="vertical-text">L</span>
+				<span class="vertical-text">L</span>
+				<span class="vertical-text">E</span>
+				<span class="vertical-text">R</span>
+				<span class="vertical-text">Y</span>
+			</a>
+		</div>
+  
+  <main>
+    <h1>CONTACT US</h1>
+    <div class="toggle-container">
+      <button id="touchBtn" class="active">Get in Touch</button>
+      <button id="locationBtn">Store Location</button>
+    </div>
+    
+    <!-- Get in Touch Content -->
+    <div id="getInTouch" class="toggle-content active">
+      <div class="contact-details">
+        <p><strong>Phone:</strong> 03 5441 5200</p>
+        <p><strong>Email:</strong> info@autoaddictionbgo.com.au</p>
+      </div>
+	  
+	  <!-- Nodemailer contact form section. -->
+      <div class="contact-form">
+        <form id="contact-form" method="post" enctype="multiparty/form-data" action="send">
+			<input type="text" id="name" name="name" placeholder="Name:" required>
+			
+			<input type="numerical" id="number" name="number" placeholder="Number:" required>
+  
+			<input type="email" id="email" name="email" placeholder="Email:" required>
+  
+			<textarea id="message" name="message" placeholder="What is your message?" required></textarea>
+			<br>
+          <button type="submit" value="submit">Send</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Store Location Content -->
+    <div id="storeLocation" class="toggle-content">
+		<h2>Our Store Location</h2>
+		<p>49 King Street, Bendigo, VIC 3550, Australia</p>
+		<br>
+		  <div class="contact-map">
+			<iframe
+			  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3196.291540287917!2d144.2748349152827!3d-36.763572936408345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad759f2f825d8ff%3A0x1675337597c472c2!2sAuto%20Addiction%20Bendigo!5e0!3m2!1sen!2sau!4v1742620788508!5m2!1sen!2sau"
+			  width="100%" height="100%" frameborder="0" style="border-radius:12px; filter: invert(90%);" allowfullscreen="" aria-hidden="false"
+			  tabindex="0"></iframe>
+		  </div>
+    </div>
+	
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+  </main>
+  
+  <!-- Dynamic footer -->
+  <footer id="footer"></footer>
+  
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/backToTop.js"></script>
+  <script>
+		// Toggle functionality for Contact Page
+		const touchBtn = document.getElementById('touchBtn');
+		const locationBtn = document.getElementById('locationBtn');
+		const getInTouch = document.getElementById('getInTouch');
+		const storeLocation = document.getElementById('storeLocation');
+		
+		touchBtn.addEventListener('click', function() {
+		  touchBtn.classList.add('active');
+		  locationBtn.classList.remove('active');
+		  getInTouch.classList.add('active');
+		  storeLocation.classList.remove('active');
+		});
+		
+		locationBtn.addEventListener('click', function() {
+		  locationBtn.classList.add('active');
+		  touchBtn.classList.remove('active');
+		  storeLocation.classList.add('active');
+		  getInTouch.classList.remove('active');
+		});
+  </script>
+  
+  <script>
+		const form = document.getElementById("contact-form");
+		
+		const formEvent = form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			
+			let mail = new FormData(form);
+			
+			sendMail(mail);
+		})
+		
+		const sendMail = (mail) => {
+			fetch("/send", {
+				method: "post",
+				body: mail,
+				
+				}).then((response) => {
+					return response.json();
+				});
+			});
+  </script>
+  
+</body>
+</html>

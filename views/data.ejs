@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    img-src 'self' https://au.lightforce.com https://www.alpine.com.au https://focalaustralia.com.au https://ultra-vision.com.au https://d2epyv9fpc5tmv.cloudfront.net/ https://www.sony.com.au data:;
+    frame-src 'self' https://www.google.com;
+    script-src 'self' 'nonce-abc123';
+  ">
+  <title>Products | Auto Addiction Bendigo</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Site Header -->
+  <div id="header"></div>
+
+  <!-- Back to Top Button -->
+  <button id="myBtn" title="Go to top" aria-label="Back to top">Top</button>
+
+  <!-- Category Title -->
+  <h1 class="category-title"><%= category %></h1>
+
+  <!-- Brand Filter -->
+	<div class="brand-filter">
+	  <label for="brandFilter">Filter by Brand:</label>
+	  <select id="brandFilter">
+		<option value="all">All Brands</option>
+		<% 
+		  const uniqueBrands = [...new Set(data.map(item => item.Brand))];
+		  uniqueBrands.forEach(brand => { 
+		%>
+		  <option value="<%= brand %>"><%= brand %></option>
+		<% }); %>
+	  </select>
+	</div>
+
+  
+  <div class="productBody">
+    <!-- Sidebar Navigation -->
+    <nav class="productNav">
+      <h2>AUDIO</h2>
+      <ul>
+		<a href="/data?category=Headunits">HEADUNITS</a>
+        <a href="/data?category=Speakers">SPEAKERS</a>
+        <a href="/data?category=Subwoofers">SUBWOOFERS</a>
+        <a href="/data?category=Amplifiers">AMPLIFIERS</a>
+        <a href="/data?category=Accessories">ACCESSORIES</a>
+      </ul>
+
+      <h2>4WD</h2>
+      <ul>
+        <a href="/data?category=Barwork">BARWORK</a>
+        <a href="/data?category=Spotlights">LIGHTING</a>
+        <a href="/data?category=Communication">COMMUNICATION</a>
+        <a href="/data?category=Suspension">SUSPENSION</a>
+        <a href="/data?category=RoofRacks">ROOF RACKS</a>
+        <a href="/data?category=Winches">WINCHES</a>
+        <a href="/data?category=Snorkels">SNORKELS</a>
+      </ul>
+
+      <h2>POWER</h2>
+      <ul>
+        <a href="/data?category=Solar">SOLAR</a>
+        <a href="/data?category=Batteries">BATTERIES</a>
+        <a href="/data?category=DCDCCharging">DCDC CHARGING</a>
+        <a href="/data?category=ACDCCharging">ACDC CHARGING</a>
+        <a href="/data?category=AccessorieSockets">ACCESSORIES SOCKETS</a>
+      </ul>
+
+      <h2>STORAGE</h2>
+      <ul>
+        <a href="/data?category=Drawers">DRAWERS</a>
+        <a href="/data?category=Fridges">FRIDGES</a>
+        <a href="/data?category=Boxes">BOXES</a>
+      </ul>
+
+      <h2>SECURITY & SAFETY</h2>
+      <ul>
+        <a href="/data?category=Trackers">TRACKERS</a>
+        <a href="/data?category=Alarms">ALARMS</a>
+        <a href="/data?category=DashCameras">DASH CAMERAS</a>
+        <a href="/data?category=LiveViewCameras">LIVE-VIEW CAMERAS</a>
+        <a href="/data?category=TowingMirrors">TOWING MIRRORS</a>
+        <a href="/data?category=ElectricBrakes">ELECTRIC BRAKES</a>
+        <a href="/data?category=Shuroos">SHUROOS</a>
+      </ul>
+    </nav>
+
+	<!-- Product Grid -->
+    <section class="product-grid">
+      <% data.forEach(item => { %>
+        <div class="product-card"
+             data-part="<%= item.PartNumber %>"
+             data-name="<%= item.Name %>"
+             data-brand="<%= item.Brand %>"
+             data-price="<%= item.Price %>"
+             data-qty="<%= item.Qty %>"
+             data-description="<%= item.Description %>"
+             data-specs="<%= item.Specs %>"
+             data-image="<%= item['ImageURL'] %>">
+          <img src="<%= item['ImageURL'] %>" alt="<%= item.Name %>" class="product-image">
+          <h1><%= item.PartNumber %></h1>
+          <h3><strong><%= item.Brand %></strong></h3>
+          <p><strong>$</strong><%= item.Price %></p>
+          <button class="popup-btn">More Info</button>
+        </div>
+      <% }); %>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <img id="modalImage" src="" alt="" class="modal-image">
+      <div class="modal-text">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <div class="modalSeparator">
+          <p><strong>Specs:</strong> <span id="modalSpecs"></span></p>
+        </div>
+        <div class="modalSeparator">
+          <div class="modalSeparatorSub1">
+            <p><strong>Brand:</strong> <span id="modalBrand"></span></p>
+            <p><strong>Part #</strong><span id="modalPart"></span></p>
+            <p><strong>Qty:</strong> <span id="modalQty"></span></p>
+          </div>
+          <div class="modalSeparatorSub2">
+            <p><strong>$<span id="modalPrice"></span></strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer id="footer"></footer>
+
+  <!-- External Scripts -->
+  <script src="/js/header.js" nonce="abc123"></script>
+  <script src="/js/footer.js" nonce="abc123"></script>
+  <script src="/js/backToTop.js" nonce="abc123"></script>
+  <script src="/js/popup.js" nonce="abc123"></script>
+
+  <!-- Brand Filter Script -->
+  <script nonce="abc123">
+    document.getElementById('brandFilter').addEventListener('change', function () {
+      const selectedBrand = this.value;
+      const productCards = document.querySelectorAll('.product-card');
+
+      productCards.forEach(card => {
+        const brand = card.getAttribute('data-brand');
+        card.style.display = (selectedBrand === 'all' || brand === selectedBrand) ? 'block' : 'none';
+      });
+    });
+  </script>
+  
+</body>
+</html>

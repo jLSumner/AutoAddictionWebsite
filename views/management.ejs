@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Management | Auto Addiction Bendigo</title>
+	<link rel="stylesheet" href="/css/stylesManagement.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+	<img id="logo" src="/images/logos/logo.png" alt="Company Logo">
+
+	<form class="logout" action="/logout" method="get">
+		<button id="logOut" type="submit">Log Out</button>
+	</form>
+
+	<h1>INVENTORY MANAGEMENT SYSTEM</h1>
+
+	<div class="mainSection">
+		<nav class="sideNav" role="navigation" aria-label="Management Navigation">
+			<div class="sideNavTop">
+				<h2>DIRECTORY</h2>
+			</div>
+			<div class="sideNavToggles">
+				<ul>
+					<button type="button" data-action="add"><i class="fas fa-plus"></i> Add Product</button>
+					<button type="button" data-action="remove"><i class="fas fa-trash"></i> Remove Product</button>
+					<button type="button" data-action="edit"><i class="fas fa-edit"></i> Edit Product</button>
+					<button type="button" data-action="qty"><i class="fas fa-boxes"></i> Adjust Qty</button>
+					<button type="button" data-action="support"><i class="fas fa-life-ring"></i> Support</button>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="sectionBody">
+			<!-- <div class="sectionFilter"> -->
+				<!-- Optional filter UI -->
+			<!-- </div> -->
+	  
+				<form action="/management/add" method="POST" class="add-product-form">
+					<div class="formRow">
+						<label for="PartNumber">Part Number:</label>
+						<input type="text" name="PartNumber" id="PartNumber" required>
+					</div>
+					<div class="formRow">
+						<label for="Name">Name:</label>
+						<input type="text" name="Name" id="Name" required>
+					</div>
+					<div class="formRow">
+						<label for="Brand">Brand:</label>
+						<input type="text" name="Brand" id="Brand" required>
+					</div>
+					<div class="formRow">
+						<label for="Price">Price:</label>
+						<input type="number" name="Price" id="Price" step="0.01" required>
+					</div>
+					<div class="formRow">
+						<label for="Description">Description:</label>
+						<textarea name="Description" id="Description" required></textarea>
+					</div>
+					<div class="formRow">
+						<label for="ImageURL">Image URL:</label>
+						<input type="url" name="ImageURL" id="ImageURL">
+					</div>
+					<div class="formRow">
+						<label for="Category">Category:</label>
+						<input type="text" name="Category" id="Category" required>
+					</div>
+					<div class="formRow">
+						<label for="Qty">Quantity:</label>
+						<input type="number" name="Qty" id="Qty" required>
+					</div>
+					<div class="formRow">
+						<label for="Specs">Specs:</label>
+						<textarea name="Specs" id="Specs"></textarea>
+					</div>
+					<div class="formRow">
+						<button type="submit">Add Product</button>
+					</div>
+					
+				</form>
+				
+				<form action="/management/remove" method="POST" class="deleteForm">
+					<input type="hidden" name="password" id="passwordField">
+					<table>
+						
+						<tr>
+							<td><input type="checkbox" name="selectedIds" value="12345"></td>
+							<td>Product Name</td>
+						</tr>
+						
+					</table>
+					<button type="button" onclick="confirmDelete()">Delete Selected</button>
+				</form>
+				
+				<form action="/management/edit" method="POST" class="editForm">
+					
+					<button type="editButton" onclick="confirmEdit()">Edit Record</button> 
+				</form>
+				
+				<form ation="/management/qty" method="POST" class="adjustQtyForm">
+				
+					<button type="adjustQtyButton" onclick="confirmQty()">Adjust Qty</button>
+				</form>
+				
+				<div class="supportSection">
+					<h1>Contact sysadmin for further assistance.</h1>
+					
+					<h2>Adding New Products</h2>
+					<p>This section is for adding new products to the database to be displayed dynamically
+					in the frontend (customer-facing) section products tab.</p>
+					<p>Ensure when you are adding new products that information is accurate; prices can sometimes
+					appear in $USD when viewed on other websites.</p>
+					<p>When sourcing image URL for a product, Mouse (Right-click) and select "Copy Image Address".
+					Then in the imageURL input field, Mouse (Right-click) and select "Paste", or Mouse (Left-click) 
+					and Ctrl + v (shortcut).</p>
+					
+					<h2>Removing Products</h2>
+					<p>This section is for removing products from the database and thus from the website.</p>
+					<p>All you need to do is search the item you are wanting to remove in the search bar, check the
+					checkbox, and click the Delete Selection button.</p>
+					<p>A confirmation pop-up will appear asking if you are sure, and to re-enter your password for 
+					confirmation.</p>
+					
+					<h2>Editing Products</h2>
+					<p>This section is for updating product records that exist currently within the database.
+					These changes will automatically be reflected on the website.</p>
+					<p>You will need to enter in either a part number, or database ID, to bring up the desired 
+					product to update. From here, check the checkbox on the product you want to update, and click
+					edit.</p>
+					<p>All fields will be editable, and all you need to do is click the Submit button upon 
+					alteration of these fields.</p>
+					
+					<h2>Adjusting Quantities</h2>
+					<p>This section is fairly straight forward. Search for a part number or database ID, and 
+					press adjust.</p>
+					<p>Change the qty field, and click the Submit button.</p>
+					
+					<h2>Further Support</h2>
+					<p>If, for whatever reason, you need further help, or something has gone astray, please 
+					contact the sysadmin. If product changes are not being reflected on the frontend website, 
+					try restarting the webserver. If that has failed, attempt restart of the SEQUEL server.</p>
+					<p>If all else fails, pray.</p>
+				</div>
+		
+		</div>
+	</div>
+
+	<script nonce="abc123">
+	  const section = document.querySelector('.sectionBody');
+	  const sections = {
+		add: document.querySelector('.add-product-form'),
+		remove: document.querySelector('.deleteForm'),
+		edit: document.querySelector('.editForm'),
+		qty: document.querySelector('.adjustQtyForm'),
+		support: document.querySelector('.supportSection')
+	  };
+
+	  let activeAction = null;
+
+	  document.querySelectorAll('[data-action]').forEach(button => {
+		button.addEventListener('click', (e) => {
+		  e.preventDefault();
+		  const action = button.getAttribute('data-action');
+
+		  Object.values(sections).forEach(sec => {
+			if (sec) sec.style.display = 'none';
+		  });
+
+		  if (activeAction === action) {
+			section.innerHTML = '<p>Select an option from the sidebar to begin.</p>';
+			activeAction = null;
+		  } else {
+			if (sections[action]) {
+			  section.innerHTML = '';
+			  section.appendChild(sections[action]);
+			  sections[action].style.display = 'block';
+			  activeAction = action;
+			} else {
+			  section.innerHTML = '<p>Section not available.</p>';
+			  activeAction = null;
+			}
+		  }
+		});
+	  });
+
+	  Object.values(sections).forEach(sec => {
+		if (sec) sec.style.display = 'none';
+	  });
+	</script>
+	
+	
+	<script nonce="abc123">
+		function confirmDelete() {
+			const confirmed = confirm('Are you sure you want to delete the selected products?');
+			if (!confirmed) return;
+
+			const password = prompt('Enter password to confirm deletion:');
+			if (password !== null) {
+				document.getElementById('passwordField').value = password;
+				document.getElementById('deleteForm').submit();
+			}
+		}
+	</script>
+</body>
+</html>

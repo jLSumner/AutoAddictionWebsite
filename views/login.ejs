@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    img-src 'self' https://au.lightforce.com https://www.alpine.com.au https://focalaustralia.com.au https://ultra-vision.com.au https://d2epyv9fpc5tmv.cloudfront.net/ https://www.sony.com.au data:;
+    frame-src 'self' https://www.google.com;
+    script-src 'self' 'nonce-abc123';
+  ">
+  <title>Login | Auto Addiction Bendigo</title>
+  <link rel="stylesheet" href="/css/stylesLogin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="loginSection">
+    <img src="/images/logos/logo.png" alt="Auto Addiction Logo">
+    <form action="/login" method="post">
+      <div class="formGroup">
+        <label for="user">User:</label>
+        <input type="text" id="user" name="user" placeholder="Enter your username" required>
+      </div>
+      <div class="formGroup">
+        <label for="password">Pass:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+      <button id="loginButton" type="submit">Login</button>
+    </form>
+  </div>
+
+</body>
+</html>

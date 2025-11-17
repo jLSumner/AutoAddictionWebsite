@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Products | Auto Addiction Bendigo</title>
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	</head>
+	<body style="justify-items: center;">
+		<!-- site header -->
+		<div id="header"></div>
+		<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+		
+		<h1 style="color:#2e96db; text-align: center; margin-top: 25px; margin-left: 25px; font-size: 4rem;">PRODUCTS</h1>
+		
+		<div class="productBody">
+			<div class="productNav">
+				<h2>AUDIO</h2>
+				<ul>
+					<a href="/data?category=Headunits">HEADUNITS</a>
+					<a href="/data?category=Speakers">SPEAKERS</a>
+					<a href="/data?category=Subwoofers">SUBWOOFERS</a>
+					<a href="/data?category=Amplifiers">AMPLIFIERS</a>
+					<a href="/data?category=Accessories">ACCESSORIES</a>
+				</ul>
+				
+				<h2>4WD</h2>
+				<ul>
+					<a href="/data?category=Barwork">BARWORK</a>
+					<a href="/data?category=Spotlights">LIGHTING</a>
+					<a href="/data?category=Communication">COMMUNICATION</a>
+					<a href="/data?category=Suspension">SUSPENSION</a>
+					<a href="/data?category=RoofRacks">ROOF RACKS</a>
+					<a href="/data?category=Winches">WINCHES</a>
+					<a href="/data?category=Snorkels">SNORKELS</a>
+				</ul>
+				
+				<h2>POWER</h2>
+				<ul>
+					<a href="/data?category=Solar">SOLAR</a>
+					<a href="/data?category=Batteries">BATTERIES</a>
+					<a href="/data?category=DCDCCharging">DCDC CHARGING</a>
+					<a href="/data?category=ACDCCharging">ACDC CHARGING</a>
+					<a href="/data?category=AccessorieSockets">ACCESSORIES SOCKETS</a>
+				</ul>
+				
+				<h2>STORAGE</h2>
+				<ul>
+					<a href="/data?category=Drawers">DRAWERS</a>
+					<a href="/data?category=Fridges">FRDIGES</a>
+					<a href="/data?category=Boxes">BOXES</a>
+				</ul>
+				
+				<h2>SECURITY & SAFETY</h2>
+				<ul>
+					<a href="/data?category=Trackers">TRACKER
+					<a href="/data?category=Alarms">ALARMS</a>
+					<a href="/data?category=DashCameras">DASH CAMERAS</a>
+					<a href="/data?category=LiveViewCameras">LIVE-VIEW CAMERAS</a>
+					<a href="/data?category=TowingMirrors">TOWING MIRRORS</a>
+					<a href="/data?category=ElectricBrakes">ELECTRIC BRAKES</a>
+					<a href="/data?category=Shuroos">SHUROOS</a>
+				</ul>
+			</div>
+		
+		
+			<div class="productMain"></div>
+			
+		</div>
+
+		  <!-- site footer -->
+		  <footer id="footer"></footer>
+
+		  <script src="js/header.js"></script>
+		  <script src="js/footer.js"></script>
+		  <script src="js/backToTop.js"></script>
+		  <!-- <script src="js/dropperDisplay.js"></script> -->
+		  
+		  <script>
+		  window.onload = function () {
+			fetch('/products')
+			  .then(response => response.json())
+			  .then(data => displayProducts(data))
+			  .catch(error => console.error('Error loading products:', error));
+		  };
+
+		  function loadProducts(el) {
+			const category = el.getAttribute('data-category');
+			fetch(`/products/${category}`)
+			  .then(response => response.json())
+			  .then(data => displayProducts(data))
+			  .catch(error => console.error('Error loading category products:', error));
+		  }
+
+		  function displayProducts(products) {
+			const container = document.querySelector('.productMain');
+			container.innerHTML = '';
+
+			products.forEach(product => {
+			  const card = document.createElement('div');
+			  card.className = 'product-card';
+
+			  card.innerHTML = `
+				<img src="${product.image_url || 'images/default.jpg'}" alt="${product.name}" class="product-image">
+				<h3 class="product-title">${product.name}</h3>
+				<p class="product-description">${product.description}</p>
+				<p class="product-price">$${product.price}</p>
+			  `;
+
+			  container.appendChild(card);
+			});
+		  }
+		</script>
+		  
+</body>
+</html>
+
